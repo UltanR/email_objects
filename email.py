@@ -38,7 +38,6 @@ def operate_email():    # allows user to select email as long as there are more 
         try:
             choice = int(input("What number corresponds with the email you would like to read: "))
             get_email(choice-1) # calls email selected by user
-            inbox[choice-1].mark_as_read()
             break
 
         except ValueError:
@@ -57,6 +56,8 @@ def get_count():
 
 def get_email(i):
 
+    inbox[i].mark_as_read()
+
     print(f"From address: {inbox[i].from_address}") # displays email contents and address
     print(f"Email contents: {inbox[i].email_contents}")
 
@@ -67,7 +68,7 @@ def get_email(i):
     if remove_yn == "y":
         delete(i)
     
-    if inbox[i].is_spam == False:   # email can be marked spam
+    elif inbox[i].is_spam == False:   # email can be marked spam
         spam_yn = input("Mark as spam (y/n): ")
         if spam_yn == "y":
             inbox[i].mark_as_spam()
